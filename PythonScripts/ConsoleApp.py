@@ -4,9 +4,11 @@ from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_ollama import OllamaLLM
 from langchain.chains import RetrievalQA
 
-# Embedding-Funktion und Datenbank laden (Pfad wie in SetupDB.py)
+# Absoluter Pfad zum Projektverzeichnis
+project_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+persist_directory = os.path.join(project_dir, "vektordatenbank")
+
 embedding_function = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
-persist_directory = os.path.join(os.path.dirname(os.path.dirname(__file__)), "vektordatenbank")
 vectordb = Chroma(
     embedding_function=embedding_function,
     persist_directory=persist_directory

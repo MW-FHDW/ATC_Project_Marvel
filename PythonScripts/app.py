@@ -5,10 +5,11 @@ from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_ollama import OllamaLLM
 from langchain.chains import RetrievalQA
 
-# Setup
+# Absoluter Pfad zum Projektverzeichnis
+project_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+persist_directory = os.path.join(project_dir, "vektordatenbank")
+
 embedding = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
-# Persist-Verzeichnis eine Ebene höher
-persist_directory = os.path.join(os.path.dirname(os.path.dirname(__file__)), "vektordatenbank")
 vectordb = Chroma(persist_directory=persist_directory, embedding_function=embedding)
 llm = OllamaLLM(model="llama3.2")
 qa_chain = RetrievalQA.from_chain_type(llm=llm, retriever=vectordb.as_retriever(), return_source_documents=True)
