@@ -8,7 +8,7 @@ import os
 import json
 
 # 📄 Nur die gewünschte JSON-Datei laden
-json_file = r"Beispieldaten\275.json"
+json_file = r"..\Beispieldaten\275.json"
 
 documents = []
 if os.path.exists(json_file):
@@ -30,10 +30,11 @@ docs = text_splitter.split_documents(documents)
 embedding_function = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 
 # 💾 Chroma Vektordatenbank initialisieren
+persist_directory = os.path.join(os.path.dirname(os.path.dirname(__file__)), "vektordatenbank")
 vectordb = Chroma.from_documents(
     documents=docs,
     embedding=embedding_function,
-    persist_directory="vektordatenbank"
+    persist_directory=persist_directory
 )
 
 # 🤖 Lokales Modell über Ollama

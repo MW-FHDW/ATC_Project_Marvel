@@ -1,13 +1,15 @@
+import os
 from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_ollama import OllamaLLM
 from langchain.chains import RetrievalQA
 
-# Embedding-Funktion und Datenbank laden (Pfad wie in Setup2.py)
+# Embedding-Funktion und Datenbank laden (Pfad wie in SetupDB.py)
 embedding_function = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+persist_directory = os.path.join(os.path.dirname(os.path.dirname(__file__)), "vektordatenbank")
 vectordb = Chroma(
     embedding_function=embedding_function,
-    persist_directory="vektordatenbank"
+    persist_directory=persist_directory
 )
 
 # Ollama LLM initialisieren (Modellname ggf. anpassen)

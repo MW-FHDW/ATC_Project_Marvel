@@ -43,7 +43,8 @@ $packages = @(
     "langchain-ollama",
     "chromadb",
     "torch",
-    "transformers"
+    "transformers",
+    "sentence-transformers"
 )
 
 foreach ($pkg in $packages) {
@@ -85,6 +86,8 @@ if ($models -notmatch "llama3.2") {
 } else {
     Write-Host "Modell 'llama3.2' ist bereits vorhanden."
 }
+
+cd .\PythonScripts
 
 Write-Host "Führe SetupDB.py aus..."
 python SetupDB.py

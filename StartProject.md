@@ -2,9 +2,11 @@
 
 A. Die Konsolen-App starten
     1. PowerShell öffnen
-    2. "python ConsoleApp.py" eingeben und ausführen
+    2. mit "cd .\PythonScripts" ins richtige Verzeichnis wechseln
+    3. "python ConsoleApp.py" eingeben und ausführen
 
 B. Die Web-App starten
     1. PowerShell öffnen
-    2. "streamlit run app.py" eingeben und ausführen
+    2. mit "cd .\PythonScripts" ins richtige Verzeichnis wechseln
+    3. "streamlit run app.py" eingeben und ausführen
     

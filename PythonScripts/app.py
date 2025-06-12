@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
@@ -6,7 +7,9 @@ from langchain.chains import RetrievalQA
 
 # Setup
 embedding = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
-vectordb = Chroma(persist_directory="vektordatenbank", embedding_function=embedding)
+# Persist-Verzeichnis eine Ebene höher
+persist_directory = os.path.join(os.path.dirname(os.path.dirname(__file__)), "vektordatenbank")
+vectordb = Chroma(persist_directory=persist_directory, embedding_function=embedding)
 llm = OllamaLLM(model="llama3.2")
 qa_chain = RetrievalQA.from_chain_type(llm=llm, retriever=vectordb.as_retriever(), return_source_documents=True)
 
